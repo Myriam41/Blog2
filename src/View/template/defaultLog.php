@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Viva Informatique</title>
+    <title>Stamp Development</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -28,35 +28,19 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
   <div class="container">
-    <a class="navbar-brand" href="index.php?page=home"><img src="../img/Stamp100.png" alt="logo Stamp Development"/></a>
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+    <div class='row'>
+      <a class="navbar-brand" href="index.php?page=home"><img src="../img/stamp_JauBleu200.png" alt="logo Stamp Development"/></a>
+    </div>
 
-    <!--Menu -->
     <?php
       require'menu.php';
     ?>
   </div>
   </nav>
 
-  <!-- Page Header -->
-  <header class="masthead" style="background-image: url(<?= $imgHeader ?>)">
-    <div class="overlay"></div>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12 col-md-12 mx-auto">
-          <div class="site-heading text-nowrap">
-            <h1><?= $pageTitle ?></h1>
-            <span class="subheading"><?= $subTitle ?></span><br/>
-            <?= $imglittle ?>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
-
   <!-- Main Content -->
   <?= $content ?>
-    
+
   <!-- Pager -->
   <div class="clearfix">
     <a class="btn btn-primary float-right" href="#">Haut de page &rarr;</a>
@@ -64,8 +48,8 @@
 
   <hr>
 
-  <!-- Footer -->
-  <footer>
+ <!-- Footer -->
+ <footer>
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
@@ -103,7 +87,7 @@
           <?php 
           if ($_SESSION['status']== 1) {
             ?>
-            <a class= "admin" href="index.php?page=admin">admin</a>
+            <a class = "admin" href="index.php?page=admin">admin</a>
           <?php
           }
           ?>

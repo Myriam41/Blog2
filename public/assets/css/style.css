@@ -20,3 +20,58 @@
     background-color:gray;
     opacity : 1;
 }
+
+/*.formlog{
+    margin: auto;
+    background-color: aquamarine;
+}*/
+
+.bloccomments{
+    margin-top: 20px;
+    background-color: beige;
+}
+
+h3 {
+    text-align: center;
+}
+.masthead{
+    margin-bottom: 20px;
+}
+.pageTitle{
+    text-align: center;
+}
+
+.container_reply{
+    background-color: rgb(94, 166, 184);
+}
+
+#mimi{
+    width: 50%;
+    height: auto;
+    margin: auto;
+}
+
+#introduce{
+    border: 1px;
+    border-color: blue;
+    border-style: solid;
+    border-radius: 20px;
+}
+
+
+.postTitle{
+    text-align: center;
+    margin: auto;
+    background-color: rgb(81, 81, 228);
+}
+
+
+
+/* Default page 1 and 2 */
+.admin{
+    text-align: center;
+}
+
+.container-content{
+    margin-top: 150px;
+}

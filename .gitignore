@@ -1,1 +1,10 @@
 node_modules
+.htaccess
+.travis.yml
+LICENSE
+package-lock.json
+package.json
+gulpfile.js
+composer.json
+src/Entity/Model/Connect.php
+public/.htaccess

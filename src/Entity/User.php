@@ -5,7 +5,6 @@ namespace App\Entity;
 /**
  * Class User
  */
-
 class User
 {
     /**
@@ -14,14 +13,14 @@ class User
     private $id;
 
     /**
-     * @var string username
+     * @var string userpseudo
      */
-    private $name;
+    private $pseudo;
 
     /**
      * @var string user's password
      */
-    private $password;
+    private $pass;
 
     /**
      * @var string user's statut
@@ -38,7 +37,7 @@ class User
      */
     private $email;
 
-        /**
+    /**
      * @var string user's phone
      */
     private $phone;
@@ -48,8 +47,7 @@ class User
      */
     public function __construct($data)
     {
-        if (isset($data))
-        {
+        if (isset($data)) {
             $this->hydrate($data);
         }
     }
@@ -68,12 +66,12 @@ class User
                 $this->setId($data['id']);
             }
              
-            if (isset($data['name'])) {
-                $this->setTName($data['name']);
+            if (isset($data['pseudo'])) {
+                $this->setpseudo($data['pseudo']);
             }
             
-            if (isset($data['password'])) {
-                $this->setPassword($data['password']);
+            if (isset($data['pass'])) {
+                $this->setPass($data['pass']);
             }
 
             if (isset($data['statut'])) {
@@ -111,51 +109,51 @@ class User
     }
 
     /**
-    * @return string name
+    * @return string pseudo
     */
-    public function getName()
+    public function getpseudo()
     {
-        return $this->name;
+        return $this->pseudo;
     }
 
     /**
-     * @param string $name
+     * @param string $pseudo
      */
-    public function setName($name)
+    public function setpseudo($pseudo)
     {
-        $this->name = $name;
+        $this->pseudo = htmlspecialchars($pseudo);
     }
 
     /**
-    * @return string statut
+    * @return string status
     */
-    public function getStatut()
+    public function getStatus()
     {
-        return $this->statut;
+        return $this->status;
     }
 
     /**
-     * @param string $statut
+     * @param string $status
      */
-    public function setStatut($statut)
+    public function setStatut($status)
     {
-        $this->statut = $statut;
+        $this->status = $status;
     }
 
     /**
      * @return string password
      */
-    public function getPassword()
+    public function getPass()
     {
-        return $this->password;
+        return $this->pass;
     }
 
     /**
      * @param string $password
      */
-    public function setPassword($password)
+    public function setPass($pass)
     {
-        $this->password = $password;
+        $this->pass = htmlspecialchars($pass);
     }
 
     /**
@@ -187,9 +185,9 @@ class User
      */
     public function setEmail($email)
     {
-        $this->email = $email;
+        $this->email = htmlspecialchars($email);
     }
-        /**
+    /**
     * @return string phone
     */
     public function getPhone()
@@ -202,6 +200,6 @@ class User
      */
     public function setPhone($phone)
     {
-        $this->phone = $phone;
+        $this->phone = htmlspecialchars($phone);
     }
 }

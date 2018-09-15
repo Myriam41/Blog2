@@ -1,30 +1,38 @@
 <?php
+foreach ($post as $article) {
+    $imgHeader = '';
+    $pageTitle = htmlspecialchars($article['title']);
+    $subTitle = htmlspecialchars($article['introduction']);
 
-$imgHeader = '';
-$pageTitle = htmlspecialchars($post->getTitle());
-$subTitle = htmlspecialchars($post->getIntroduction());
+    // Page header little image
+    $imglittle = '';
 
-// Page header little image
-$imglittle = '';
+    ob_start();
+    //_____________Display Post______________________
+        require '../src/view/template/post.php'; ?>
 
-ob_start();
-
-//!-- Main Content --
-?>
-    <div class="container">
-    <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
-            <span class="post-meta">Posté par 
-            <?= htmlspecialchars($author->getName()); ?> le 
-            <?= htmlspecialchars($post->getCreatedAt()); ?></span></br>
-
-            <article> <?= htmlspecialchars($post->getContent()); ?></article>
-        </div>
-
-        </div>
+    <div class="bloccomments">
+        <h3>commentaires</h3>
+<?php
+            //________Display comments et replies__________
+            require '../src/view/template/comment.php'; ?>
     </div>
+    
+    <div class='row'>
+<?php
+        //____________Display commentAdd___________________
+        if ($_SESSION['status']== 1) {
+            require '../src/view/template/commentAdd.php';
+        } else {
+            echo 'Pour réagir à l\'article, vous devez être enregistré et connecté';
+        } ?>
     </div>
+    <div class='row'>
+    </div>
+
 <?php
 
 $content = ob_get_clean();
-require ('../src/view/template/default.php');
+
+    require '../src/view/template/default.php';
+}

@@ -11,7 +11,7 @@ ob_start();?>
 
   <!-- Main Content -->
   <div class="well">
-  <form cible="Index.php?action=addpost" action="post" class="col-lg-10">
+  <form action="index.php?page=postAdd" method="post" class="col-lg-10">
     <legend>Ecrire un nouvel article</legend>
     <fieldset>
       <div class="form group">
@@ -24,8 +24,8 @@ ob_start();?>
       </div>
       <div class="form group">  
         <label for "content">Texte : </label>
-        <textaera id="content" name="content" type="textaera" class="form-control" placeholder="texte" rows="50" required data-validation-required-message="Merci d'entrer un contenu."> </textaera>
-      </div>
+      <textarea id="content" name="content" class="form-control" rows="4" cols="50"></textarea> </div>
+      
 </br>
       <div class="form-group">
             <button type="submit" class="btn btn-primary" id="sendMessageButton">Envoyer</button>
@@ -38,4 +38,4 @@ ob_start();?>
 
 $content = ob_get_clean();
 
-require ('../src/View/template/default.php');
+require('../src/View/template/default.php');

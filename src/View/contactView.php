@@ -65,4 +65,4 @@ ob_start();?>
 
 $content = ob_get_clean();
 
-require ('../src/View/template/default.php');
+require('../src/View/template/default.php');

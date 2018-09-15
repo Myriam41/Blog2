@@ -9,7 +9,6 @@ use App\Entity\User;
 /**
  * Class PostController
  */
-
 class PostController
 {
     /**
@@ -20,11 +19,6 @@ class PostController
     {
         $postRepository = new PostRepository();
         $posts = $postRepository->getByLimit();
-
-        $userid = $posts->getUserId();
-        $user = new User($userId);
-        $author = $user->getName();
-
         require '../src/View/postListView.php';
     }
     
@@ -34,17 +28,16 @@ class PostController
      */
     public function post()
     {
-        $postId = $_GET['id'];
         $postRepository = new PostRepository();
+        $dispComment = new CommentRepository();
+        $replyComment = new CommentRepository();
 
-        if (!empty($postId)) {
-            $post = $postRepository->getOneById($postId);
+        if (!empty($_SESSION['postId'])) {
+            $post = $postRepository->getOneById($_SESSION['postId']);
+            $comments = $dispComment->getCommentsPost($_SESSION['postId']);
+            $replies = $replyComment->getReplies($_SESSION['postId']);
         }
 
-        $comments = new CommentRepository();
-        if (!empty($postId)) {
-            $comments->getByPostId($postId);
-        }
         require '../src/View/postView.php';
     }
 
@@ -56,8 +49,45 @@ class PostController
     {
         $userId = $_post['userId'];
         $userRepository = new UserRepository();
-        if(!empty($userId)){
+        if (!empty($userId)) {
             $author = $userRepository->getAuthor();
         }
+    }
+
+    /**
+     * new post
+     */
+    public function newPost()
+    {
+        $addPost = new PostRepository();
+        $addPost->addPost();
+    }
+
+    /**
+     * edit post
+     */
+    public function postEdit()
+    {
+        $postRepo = new PostRepository();
+        $post = $postRepo->getOneById();
+        require '../src/View/editPostView.php';
+    }
+
+    /**
+     * delete post
+     */
+    public function postDelete()
+    {
+        $postDelete = new PostRepository();
+        $postDelete->deletePost();
+    }
+
+    /**
+     * update post
+     */
+    public function postUpdate()
+    {
+        $postUpdate = new PostRepository();
+        $postUpdate->updatePost();
     }
 }

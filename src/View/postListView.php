@@ -1,44 +1,56 @@
 <?php
 
-$imgHeader = '../img/chouette_vol_640x420.png';
-$pageTitle = '';
-$subTitle = 'Hier, Aujourd\'hui, Demain';
-
-// Page header little image
-$imglittle = '';
-
 ob_start();
-
 ?>
-<p><a class="nav-link" href="index.php?page=postAdd">Ajouter un article</a></p>
+<hr>
+<div class="row">
 <?php
-//!-- Main Content last 10 posts--
-foreach($posts as $post){?>
-    <div class="container">
-    <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
-        <div class="post-preview">
-            <a href="index.php?id=<?= $post->getId()?>&amp;page=post">
-            <h2 class="post-title">
-                <?= htmlspecialchars($post->getTitle()); ?>
-            </h2>
-            <h3 class="post-subtitle">
-                <?= htmlspecialchars($post->getIntroduction());?>
-            </h3>
-            </a>
-            <span class="post-meta">Posté par 
-            <?= htmlspecialchars($auteur->getName()); ?> le 
-            <?= htmlspecialchars($post->getCreatedAt()); ?></span></br>
+    if ($_SESSION['userId']!=0) {
+        ?>
+        <p><a class="" href="index.php?page=postNew">Ajouter un article</a></p>
+    <?php
+    }?>
+</div>
 
-            <a href="index.php?id=<?= $post->getId()?>&amp;page=post">Lire l'article</a>
+<div class="row">    
+    <?php
+    // Main Content last 10 posts
+    foreach ($posts as $post) {
+        ?>     
+        <div class="col-lg-6 col-md-6 mx-auto">
+            <div class="postTitle">
+                <a href="index.php?id=<?= $post['post_id']?>&amp;page=post">
+                    <h2 >
+                        <?= htmlspecialchars($post['title']); ?>
+                    </h2>
+                </a>
+            </div>
+                <h3 class="post-subtitle">
+                    <?= htmlspecialchars($post['introduction']); ?>
+                </h3>
+                
+                <span class="post-meta">Posté par
+                    <?= htmlspecialchars($post['pseudo']); ?>
+                    le 
+                    <?= htmlspecialchars($post['createdAt']);
+
+        if (isset($post['updateAt'])) {
+            ?>
+                            . Mis à jour le 
+                            <?= htmlspecialchars($post['updateAt']); ?>
+                    <?php
+        } ?>  
+                </span>
+                <br/>
+
+                <a href="index.php?id=<?= $post['post_id']?>&amp;page=post">Lire l'article</a>
         </div>
-        </div>
-    </div>
-    </div>
+        <?php
+    } ?>
+</div>
 
 <?php
-}
 
 $content = ob_get_clean();
 
-require ('../src/View/template/default.php');
+require('../src/View/template/default2.php');
