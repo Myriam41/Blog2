@@ -8,4 +8,3 @@ gulpfile.js
 composer.json
 src/Entity/Model/Connect.php
 public/.htaccess
-public/img
