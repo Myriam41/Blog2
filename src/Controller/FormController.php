@@ -26,8 +26,9 @@ class FormController  extends Connect
         }
         else{
             $sujet = $name.' depuis le site viva Informatique';
-            $headers = 'From : ' . htmlspecialchars($_POST['email']). "\r\n";
-            mail($to, $sujet, $message, $headers); 
+            $headers = prepare('From : ' . 'email = :email' . "\r\n");
+            $headers->bindParam(':email', $email, PDO::PARAM_STR);
+            mail($to, $sujet, $message, $headers);
         }
     }
 }
