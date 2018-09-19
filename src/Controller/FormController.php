@@ -26,7 +26,7 @@ class FormController  extends Connect
         }
         else{
             $sujet = $name.' depuis le site viva Informatique';
-            $headers = 'From : ' . $email . "\r\n";
+            $headers = 'From : ' . htmlspecialchars($_POST['email']). "\r\n";
             mail($to, $sujet, $message, $headers); 
         }
     }
