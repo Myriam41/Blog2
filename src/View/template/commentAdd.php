@@ -10,8 +10,8 @@
       <textarea id="contmessage" name="contmessage" class="form-control" rows="4" cols="50">
       </textarea> </div>
 
-      <input type="hidden" name="postId" value= $_SESSION['postId'] />
-</br>
+      <input type="hidden" name="postId" value=$_SESSION['postId']>
+<br/>
       <div class="form-group">
             <button type="submit" class="btn btn-primary" id="sendMessageButton">Envoyer</button>
       </div>

@@ -23,6 +23,11 @@ foreach ($post as $data) {
             </div>
 
             <div class="form group">  
+                <label>Auteur : </label>
+                <textarea id="author" name="author" type="text" class="form-control" rows="1" cols="50"><?= $data['author']; ?></textarea> 
+            </div>
+
+            <div class="form group">  
                 <label>Article : </label>
                 <textarea id="content" name="content" class="form-control" rows="4" cols="50"><?= $data['content']; ?></textarea> 
             </div>

@@ -66,6 +66,15 @@
 
   <!-- Footer -->
   <footer>
+    <nav class="navbar navbar-expand-lg navbar-light" id="footnav">
+      <div class="container">
+        <!--Menu -->
+        <?php
+          require'menuFooter.php';
+        ?>
+      </div>
+    </nav>
+
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
@@ -97,19 +106,7 @@
           </ul>
         </div>
       </div>
-
-      <div class="row">
-        <div class="admin">
-          <?php 
-          if ($_SESSION['status']== 1) {
-            ?>
-            <a class= "admin" href="index.php?page=admin">admin</a>
-          <?php
-          }
-          ?>
-        </div>
-      </div>
-      
+     
           <p class="copyright text-muted">Copyright &copy; Myriam 2018</p>   
     </div>
   </footer>

@@ -20,12 +20,9 @@ foreach ($post as $article) {
     
     <div class='row'>
 <?php
-        //____________Display commentAdd___________________
-        if ($_SESSION['status']== 1) {
-            require '../src/view/template/commentAdd.php';
-        } else {
-            echo 'Pour réagir à l\'article, vous devez être enregistré et connecté';
-        } ?>
+    //____________Display commentAdd___________________
+    require '../src/view/template/commentAdd.php';
+?>
     </div>
     <div class='row'>
     </div>
