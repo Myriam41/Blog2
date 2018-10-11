@@ -8,21 +8,15 @@ if ($_SESSION['connect'] === 1) {
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-            <a class="nav-link" href="index.php?page=home">Accueil</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="index.php?page=postList">Articles</a>
-        </li>
-        <!-- <li class="nav-item">
-            <a class="nav-link" href="index.php?page=contact">Contact</a>
-        </li> -->
-        <li class="nav-item">
-            <a class="nav-link" href="index.php?page=login">Enregistrement</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="index.php?page=login">Déconnexion</a>
-        </li>
+            <li class="nav-item">
+                <a class="nav-link" href="index.php?page=home">Accueil</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="index.php?page=postList">Articles</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="index.php?page=login">Déconnexion</a>
+            </li>
         </ul>
     </div>
 <?php
@@ -42,9 +36,6 @@ else {
             <li class="nav-item">
                 <a class="nav-link" href="index.php?page=postList">Articles</a>
             </li>
-            <!-- <li class="nav-item">
-                <a class="nav-link" href="index.php?page=contact">Contact</a>
-            </li> -->
             <li class="nav-item">
                 <a class="nav-link" href="index.php?page=login">Connexion</a>
             </li>

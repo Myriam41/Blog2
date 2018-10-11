@@ -29,7 +29,10 @@ ob_start();
                     <?= htmlspecialchars($post['introduction']); ?>
                 </h3>
                 
-                <span class="post-meta">Posté par
+                <span class="post-meta">
+                    écrit par
+                    <?= htmlspecialchars($post['author']); ?>
+                    Posté par
                     <?= htmlspecialchars($post['pseudo']); ?>
                     le 
                     <?= htmlspecialchars($post['createdAt']);

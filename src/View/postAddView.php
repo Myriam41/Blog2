@@ -22,11 +22,15 @@ ob_start();?>
         <label for "intro">Introduction : </label>
         <input id="intro" name="introduction" type="text" class="form-control" placeholder="Introduction" required data-validation-required-message="Merci d'écrire une introduction.">
       </div>
+      <div class="form group">   
+        <label for "author">Auteur: </label>
+        <input id="author" name="author" type="text" class="form-control" placeholder="Auteur" required data-validation-required-message="Merci de signaler l'auteur.">
+      </div>
       <div class="form group">  
         <label for "content">Texte : </label>
       <textarea id="content" name="content" class="form-control" rows="4" cols="50"></textarea> </div>
       
-</br>
+<br/>
       <div class="form-group">
             <button type="submit" class="btn btn-primary" id="sendMessageButton">Envoyer</button>
       </div>

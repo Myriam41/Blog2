@@ -2,7 +2,6 @@
 <html lang="fr">
 
   <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -50,6 +49,14 @@
 
  <!-- Footer -->
  <footer>
+  <nav class="navbar navbar-expand-lg navbar-light" id="footnav">
+    <div class="container">
+      <!--Menu -->
+      <?php
+        require'menuFooter.php';
+      ?>
+    </div>
+  </nav>
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">

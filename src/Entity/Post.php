@@ -13,6 +13,11 @@ class Post
     private $id;
 
     /**
+     * @var string post's author
+     */
+    private $author;
+
+    /**
      * @var string post's title
      */
     private $title;
@@ -73,6 +78,13 @@ class Post
                  * hydration id
                  */
                 $this->setId($data['id']);
+            }
+
+            if (isset($data['author'])) {
+                /**
+                 * hydration author
+                 */
+                $this->setId($data['author']);
             }
              
             if (isset($data['title'])) {

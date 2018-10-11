@@ -34,7 +34,7 @@ if (isset($_GET['page'])) {
 }
 
 // Routes
-// Home
+// ______________HOME__________________
 if ($p === 'home') {
     require '../src/View/homeView.php';
 }
@@ -63,11 +63,13 @@ if ($p === 'postAdd') {
     $_SESSION['title'] = htmlspecialchars($_POST['title'], ENT_IGNORE);
     $_SESSION['introduction'] = htmlspecialchars($_POST['introduction'], ENT_IGNORE);
     $_SESSION['content'] = htmlspecialchars($_POST['content'], ENT_IGNORE);
+    $_SESSION['author'] = htmlspecialchars($_POST['author'], ENT_IGNORE);
 
     $newPost = new PostController;
     $newPost->newPost();
     $newPost->listPosts();
 }
+
 // edit post
 if ($p === 'edit_post') {
     $_SESSION['postId']= intval($_GET['id']);
@@ -80,23 +82,18 @@ if ($p === 'postEdit') {
     $_SESSION['title']= ($_POST['title']); //ne fonctionne pas avec htmlspecialchars
     $_SESSION['introduction']= htmlspecialchars($_POST['introduction'], ENT_IGNORE);
     $_SESSION['content']= htmlspecialchars($_POST['content'], ENT_IGNORE);
+    $_SESSION['author']= htmlspecialchars($_POST['author'], ENT_IGNORE);
     $postController = new PostController();
     $postController->postUpdate();
     $postController->post();
 }
 
-// delete post éliminer les commentaires liés
+// delete post and his comments
 if ($p === 'delete_post') {
     $_SESSION['postId']= intval($_GET['id']);
     $postController = new PostController();
     $postController->postDelete();
     $postController->listPosts();
-}
-
-//________________CONTACT_________________
-//contact
-if ($p === 'contact') {
-    require '../src/View/contactView.php';
 }
 
 //________________FORMS___________________
@@ -115,19 +112,26 @@ if ($p === 'formLogin') {
   
     //Vérifier qu'aucun champs est vide
     if (!$_SESSION['pseudo']) {
-        ?> <script> alert("Merci de renseigner votre pseudonime")</script>
+        ?>
+        <script> alert("Merci de renseigner votre pseudonime")</script>
     <?php
+        require '../src/View/registrationView.php';
     }
   
-    if (!$_SESSION['pass']) {
-        ?> <script> alert("Merci de renseigner votre mot de passe")</script>
+    if (!empty($_SESSION['pseudo']) and !$_SESSION['pass']) {
+        ?> 
+        <script> alert("Merci de renseigner votre mot de passe")</script>
+    <?php
+        require '../src/View/registrationView.php';
+    }
+    if (!empty($_SESSION['pseudo']) and !empty($_SESSION['pass'])) {
+        //vérification du pseudo et du mot de passe et passage en mode connecté
+        $verifPseudo= new ConnectController();
+        $verifPseudo->Login();
+        require '../src/View/homeView.php'; ?> 
+        <script> alert("Bienvenue")</script>
     <?php
     }
-
-    //vérification du pseudo et du mot de passe et passage en mode connecté
-    $verifPseudo= new ConnectController();
-    $verifPseudo->Login();
-    require '../src/View/homeView.php';
 }
 
 //Registration
@@ -140,23 +144,28 @@ if ($p === 'formAddUser') {
 
     //Vérifier qu'aucun champs est vide
     if (!$_SESSION['pseudo']) {
-        ?> <script> alert("Merci de renseigner votre pseudonime")</script>
-  <?php
+        ?> 
+        <script> alert("Merci de renseigner votre pseudonime")</script>
+    <?php
+        require '../src/View/registrationView.php';
     }
 
     if (!$_SESSION['pass']) {
         ?> <script> alert("Merci de renseigner votre mot de passe")</script>
-  <?php
+    <?php
+        require '../src/View/registrationView.php';
     }
 
     if (!$_SESSION['email']) {
         ?> <script> alert("Merci de renseigner votre e-mail")</script>
-  <?php
+    <?php
+        require '../src/View/registrationView.php';
     }
 
     if (!$_SESSION['confPass']) {
         ?> <script> alert("Merci de confirmer votre mot de passe")</script>
-  <?php
+    <?php
+        require '../src/View/registrationView.php';
     }
 
     //si les mots de passes sont identiques
@@ -221,13 +230,13 @@ if ($p === 'valid_user') {
     $adminController->displayUsers();
 }
 
-
 //________________COMMENTS________________
 // Adding a comment
 if ($p === 'commentAdd') {
     $_SESSION['contmessage']=$_POST['contmessage'];
     $commentController = new CommentController();
-    $commentController->commentAdd();
+    $commentController->commentAdd(); ?><script>alert('Votre commentaire a été envoyé pour être soumis à validation')</script> <?php
+
 
     $contArticle = new PostController();
     $contArticle->post();
@@ -268,18 +277,3 @@ if ($p === 'delete_comment') {
     $contArticle = new PostController();
     $contArticle->post();
 }
-
-//________________Replies________________
-
-//display replies
-//non utilisé pour l'instant essais en cours
-if ($p==='replies') {
-    $replyComment = new CommentRepository();
-    $replies = $replyComment->getReplies();
-    return $replies;
-}
-
-
-// penser un envoyer un message pour vérifier que l'email est valide
-
-//super comment

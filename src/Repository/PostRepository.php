@@ -53,7 +53,7 @@ class PostRepository extends Connect
         $db = $this->getDb();
     
         $reqSelect = 'SELECT p.id AS post_id, 
-        p.title, p.introduction, p.createdAt, p.updateAt, user.pseudo';
+        p.title, p.author, p.introduction, p.createdAt, p.updateAt, user.pseudo';
         $reqFrom = ' FROM post AS p INNER JOIN user';
         $reqOn = ' ON p.userId = user.id';
         $reqWhere = ' WHERE p.valid = 1';
@@ -79,7 +79,7 @@ class PostRepository extends Connect
     {
         $db = $this->getDb();
 
-        $reqSelect = 'SELECT p.title, p.introduction, p.content, p.createdAt, p.updateAt, p.userId, p.id AS postId, u.pseudo  ';
+        $reqSelect = 'SELECT p.author, p.title, p.introduction, p.content, p.createdAt, p.updateAt, p.userId, p.id AS postId, u.pseudo  ';
         $reqFrom = ' FROM post AS p INNER JOIN user AS u';
         $reqOn = ' ON p.userId = u.id';
         $reqWhere = ' WHERE p.id = :postId AND p.valid = 1';
@@ -103,7 +103,7 @@ class PostRepository extends Connect
     {
         $db = $this->getDb();
 
-        $reqSelect = 'SELECT p.title, p.introduction, p.content, p.createdAt, p.updateAt, p.valid AS postValid, p.userId, p.id AS postId, u.pseudo AS pseudo, u.email AS email';
+        $reqSelect = 'SELECT p.author, p.title, p.introduction, p.content, p.createdAt, p.updateAt, p.valid AS postValid, p.userId, p.id AS postId, u.pseudo AS pseudo, u.email AS email';
         $reqFrom = ' FROM post AS p INNER JOIN user AS u';
         $reqOn = ' ON p.userId = u.id';
         $reqWhere = ' ORDER BY createdAt DESC';
@@ -127,9 +127,10 @@ class PostRepository extends Connect
         $db = $this->getDb();
 
         $reqInsert = 'INSERT INTO post';
-        $reqCol = '(title, introduction, content, createdAt, userId)';
-        $reqValues = ' VALUES(:title, :introduction, :content, NOW() , :userId)';
+        $reqCol = '(author, title, introduction, content, createdAt, userId)';
+        $reqValues = ' VALUES(:author, :title, :introduction, :content, NOW() , :userId)';
         $req = $db->prepare($reqInsert . $reqCol . $reqValues);
+        $req->bindParam(':author', $_SESSION['author'], \PDO::PARAM_INT);
         $req->bindParam(':title', $_SESSION['title'], \PDO::PARAM_STR);
         $req->bindParam(':introduction', $_SESSION['introduction'], \PDO::PARAM_STR);
         $req->bindParam(':content', $_SESSION['content'], \PDO::PARAM_STR);
@@ -151,6 +152,13 @@ class PostRepository extends Connect
         $req->bindParam(':id', $_SESSION['postId'], \PDO::PARAM_INT);
 
         $req->execute();
+
+        $reqUpdate = 'DELETE FROM comment';
+        $reqWhere = ' WHERE postid=:id';
+        $req = $db->prepare($reqUpdate . $reqWhere);
+        $req->bindParam(':id', $_SESSION['postId'], \PDO::PARAM_INT);
+
+        $req->execute();
     }
 
     /**
@@ -161,10 +169,11 @@ class PostRepository extends Connect
         $db = $this->getDb();
 
         $reqUpdate = 'UPDATE post';
-        $reqSet = ' SET title=:title, introduction=:introduction, content=:content, updateAt=now()';
+        $reqSet = ' SET author=:author, title=:title, introduction=:introduction, content=:content, updateAt=now()';
         $reqWhere = ' WHERE id=:id';
         $req = $db->prepare($reqUpdate . $reqSet . $reqWhere);
         $req->bindParam(':id', $_SESSION['postId'], \PDO::PARAM_INT);
+        $req->bindParam(':author', $_SESSION['author'], \PDO::PARAM_INT);
         $req->bindParam(':title', $_SESSION['title'], \PDO::PARAM_STR);
         $req->bindParam(':introduction', $_SESSION['introduction'], \PDO::PARAM_STR);
         $req->bindParam(':content', $_SESSION['content'], \PDO::PARAM_STR);

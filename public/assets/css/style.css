@@ -4,6 +4,7 @@
     padding:  20px;
 }
 
+/* navigation */
 #mainNav{
     background-color:gray;
     opacity : 1;
@@ -21,11 +22,17 @@
     opacity : 1;
 }
 
-/*.formlog{
+.nav-link{
     margin: auto;
-    background-color: aquamarine;
-}*/
+    color: white;
+    
+}
 
+.nav-link:hover{
+    color: black;
+}
+
+/* Post */
 .bloccomments{
     margin-top: 20px;
     background-color: beige;
@@ -34,6 +41,7 @@
 h3 {
     text-align: center;
 }
+
 .masthead{
     margin-bottom: 20px;
 }
@@ -45,6 +53,13 @@ h3 {
     background-color: rgb(94, 166, 184);
 }
 
+.postTitle{
+    text-align: center;
+    margin: auto;
+    background-color: rgb(81, 81, 228);
+}
+
+/* home page */
 #mimi{
     width: 50%;
     height: auto;
@@ -57,15 +72,6 @@ h3 {
     border-style: solid;
     border-radius: 20px;
 }
-
-
-.postTitle{
-    text-align: center;
-    margin: auto;
-    background-color: rgb(81, 81, 228);
-}
-
-
 
 /* Default page 1 and 2 */
 .admin{
