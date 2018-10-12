@@ -93,7 +93,7 @@
         <div class="admin">
           <?php 
           if ($_SESSION['status']== 1) {
-            ?>
+              ?>
             <a class = "admin" href="index.php?page=admin">admin</a>
           <?php
           }
@@ -113,5 +113,4 @@
     <script src="../js/clean-blog.min.js"></script>
 
   </body>
-
 </html>

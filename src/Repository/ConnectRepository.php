@@ -28,6 +28,7 @@ class ConnectRepository extends Connect
         'pass' => $pass,
         'email' => $email));
     }
+    
     /**
      * function SELECT user
      */
