@@ -38,5 +38,5 @@ if ($_SESSION['status']== 1) {
     </div> 
     </div>
 <?php
-}  ?>
+        }  ?>
 </div>
