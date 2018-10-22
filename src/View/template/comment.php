@@ -14,19 +14,20 @@ foreach ($comments as $comment) {
         <article> <?= htmlspecialchars($comment['contmessage']); ?></article>
     </div>
         <ul class='comment-button'>
-            <li class="nav-comment">
+            <div class="nav-comment">
                 <a class="nav-link" href="index.php?page=reply_comment&id=<?= $comment['comment_id']?>">Répondre</a>
-            </li>
+            </div>
 
     <?php   // only user who created comment can edit or delete this comment
             if ($comment['pseudo'] === $_SESSION['pseudo']) {
                 ?>
-                <li class="nav-comment">
+                <div class="nav-comment">
                     <a class="nav-link" href="index.php?page=edit_comment&id=<?= $comment['comment_id']?>">Modifier</a>
-                </li>
-                <li class="nav-comment">
+                </div>
+
+                <div class="nav-comment">
                     <a class="nav-link" href="index.php?page=delete_comment&id=<?= $comment['comment_id']?>">Supprimer</a>
-                </li>
+                </div>
     <?php
             } ?>
         </ul>
@@ -38,7 +39,7 @@ foreach ($comments as $comment) {
     foreach ($replies as $reply) {
         if ($comment['comment_id'] == $reply['parentId']) {
             ?>
-            <div class="container_reply">
+            <div class="container" id="container_reply">
             <div class="row">
                 <div class="col-lg-8 col-md-10 mx-auto">
                     <span class="post-meta">Posté par 
@@ -46,23 +47,24 @@ foreach ($comments as $comment) {
                         <?= htmlspecialchars($reply['createdAt']); ?></span><br/>
 
                     <article> <?= htmlspecialchars($reply['contmessage']); ?></article>
-                </div>
-            
-                <ul class='comment-button'>                   
+                    <br/>
+                </div>  
+            </div>   
+            <div class="row">          
 <?php 
                 // only user who created comment can edit or delete this comment
-                if ($comment['pseudo'] === $_SESSION['pseudo']) {
+                if ($reply['pseudo'] === $_SESSION['pseudo']) {
                     ?>
-                    <li class="nav-comment">
+                    <div class="nav-comment">
                         <a class="nav-link" href="index.php?page=edit_comment&id=<?= $reply['comment_id']?>">Modifier</a>
-                    </li>
-                    <li class="nav-comment">
+                    </div>
+
+                    <div class="nav-comment">
                         <a class="nav-link" href="index.php?page=delete_comment&id=<?= $reply['comment_id']?>">Supprimer</a>
-                    </li>
+                    </div>
+            </div>
 <?php
                 } ?>
-                </ul>
-            </div>
             </div>
 <?php
         }

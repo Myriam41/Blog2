@@ -165,7 +165,7 @@ class Comment
     /**
      * @param int $updateAt
      */
-    public function setUpdateAt()
+    public function setUpdateAt($updateAt)
     {
         $this->updateAt = $updateAt;
     }
