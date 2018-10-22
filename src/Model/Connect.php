@@ -38,21 +38,4 @@ abstract class Connect
 
         return $this->db;
     }
-
-    /**
-     * Function to secure data 
-     */
-    protected function secure_db($data)
-    {
-        // check if data is an integer
-        if (ctype_digit($data)) {
-            $data=intval($data);
-        }
-
-        // other type
-        else {
-            $data=mysql_real_escape_string($data);
-            $data=addcslashes($data, '%_');
-        }
-    }
 }
