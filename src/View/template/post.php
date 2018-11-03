@@ -25,7 +25,7 @@ $_SESSION['postId' ]= $article['postId'];
 </div>
 
 <?php
-if ($_SESSION['status']== 1) {
+if ($_SESSION['connect']=1 && $_SESSION['status']== 1) {
             ?>
     <div class="col-lg-10 col-md-11 mx-auto">
     <div class="row">

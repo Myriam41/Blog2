@@ -6,12 +6,12 @@
     <legend>Ecrire un commentaire</legend>
       <fieldset>
         <div class="form group">  
-          <label for "contmessage">Message : </label>
+          <label for="contmessage">Message : </label>
           <textarea id="contmessage" name="contmessage" class="form-control" rows="4" cols="50">
           </textarea> 
         </div>
 
-        <input type="hidden" name="postId" value=$_SESSION['postId']>
+        <input type="hidden" name="postId" value=<?php echo $_SESSION['postId'];?>>
   <br/>
         <div class="form-group">
               <button type="submit" class="btn btn-primary" id="sendMessageButton">Envoyer</button>

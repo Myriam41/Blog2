@@ -16,7 +16,7 @@ abstract class Connect
      */
     private $db;
 
-    /**
+        /**
      * Function to connect
      * @return db
      */
@@ -25,17 +25,34 @@ abstract class Connect
         if ($this->db === null) {
             try {
                 $db = new \PDO('mysql:dbname=viva;host=localhost;charset=utf8', 'root', '');
-
                 $db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-
                 $this->db = $db;
-
                 return $this->db;
             } catch (PDOException $e) {
                 die('Echec lors de la connexion : '.$e->getMessage());
             }
         }
-
         return $this->db;
     }
+   
+   
+    /**
+     * Function to connect
+     * @return db
+     */
+    //protected function getDb()
+    //{
+    //    if ($this->db === null) {
+      //      $db = new MySQLi('localhost', 'root', '', 'viva');
+//
+  //          return $this->db;
+//
+ //           if (mysqli_connect_errno()) {
+   //             printf("Echec lors de la connexion : %s\n", mysqli_connect_error());
+     //           exit();
+       //     }
+        //}
+
+     //   return $this->db;
+    //}
 }

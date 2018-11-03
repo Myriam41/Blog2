@@ -29,7 +29,7 @@ ob_start();?>
             //initialisation de la lecture du tableau
             $k = 0;
             //création du tableau?>
-            <table border=1>
+            <table border="1">
                 <tr>          
                     <th scope="col">Utilisateur</th>
                     <th scope="col">Statut</th>

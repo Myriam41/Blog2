@@ -16,7 +16,7 @@ class FormController  extends Connect
 
     public function sendMessage()
     {
-        $to = 'lieninformatique9@gmail.com';
+        $to = 'lieninformatique11@gmail.com';
         $name = htmlspecialchars($_POST['name']);
         $email = htmlspecialchars($_POST['email']);
         $message = htmlspecialchars($_POST['message']);
@@ -26,8 +26,7 @@ class FormController  extends Connect
         }
         else{
             $sujet = $name.' depuis le site viva Informatique';
-            $headers = prepare('From : ' . 'email = :email' . "\r\n");
-            $headers->bindParam(':email', $email, PDO::PARAM_STR);
+            $headers = 'From : ' . 'email' . "\r\n" ;
             mail($to, $sujet, $message, $headers);
         }
     }
