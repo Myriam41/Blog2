@@ -21,32 +21,32 @@ ob_start();
             <div class="postTitle">
                 <a href="index.php?id=<?= $post['post_id']?>&amp;page=post">
                     <h2 >
-                        <?= htmlspecialchars($post['title']); ?>
+                        <?= esc_attr($post['title']); ?>
                     </h2>
                 </a>
             </div>
                 <h3 class="post-subtitle">
-                    <?= htmlspecialchars($post['introduction']); ?>
+                    <?= esc_attr($post['introduction']); ?>
                 </h3>
                 
                 <span class="post-meta">
                     écrit par
-                    <?= htmlspecialchars($post['author']); ?>
+                    <?= esc_attr($post['author']); ?>
                     Posté par
-                    <?= htmlspecialchars($post['pseudo']); ?>
+                    <?= esc_attr($post['pseudo']); ?>
                     le 
-                    <?= htmlspecialchars($post['createdAt']);
+                    <?= esc_attr($post['createdAt']);
 
         if (isset($post['updateAt'])) {
             ?>
                             . Mis à jour le 
-                            <?= htmlspecialchars($post['updateAt']); ?>
+                            <?= esc_attr($post['updateAt']); ?>
                     <?php
         } ?>  
                 </span>
                 <br/>
 
-                <a href="index.php?id=<?= $post['post_id']?>&amp;page=post">Lire l'article</a>
+                <a href="index.php?id=<?= esc_url($post['post_id'])?>&amp;page=post">Lire l'article</a>
         </div>
         <?php
     } ?>

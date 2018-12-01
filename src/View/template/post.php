@@ -1,6 +1,6 @@
 <?php
 
-$_SESSION['postId' ]= $article['postId'];
+$_SESSION['postId' ]= esc_attr($article['postId']);
 
 //!-- Main Content --?>
 <div class="container">
@@ -8,32 +8,32 @@ $_SESSION['postId' ]= $article['postId'];
     <div class="col-lg-10 col-md-11 mx-auto">
         <span class="post-meta">
         écrit par
-        <?= htmlspecialchars($article['author']); ?> 
+        <?= esc_attr($article['author']); ?> 
         Posté par 
-        <?= htmlspecialchars($article['pseudo']); ?> le 
-        <?= htmlspecialchars($article['createdAt']);
+        <?= esc_attr($article['pseudo']); ?> le 
+        <?= esc_attr($article['createdAt']);
 
         if (isset($article['updateAt'])) {
             ?>
             . Mis à jour le 
-            <?= htmlspecialchars($article['updateAt']); ?></span><br/><br/>
+            <?= esc_attr($article['updateAt']); ?></span><br/><br/>
 <?php
         }?>
 
-        <article> <?= htmlspecialchars($article['content']); ?></article>
+        <article> <?= esc_attr($article['content']); ?></article>
     </div>
 </div>
 
 <?php
-if ($_SESSION['connect']=1 && $_SESSION['status']== 1) {
+if ($_SESSION['connect']==1 && $_SESSION['status']== 1) {
             ?>
     <div class="col-lg-10 col-md-11 mx-auto">
     <div class="row">
         <div class="nav-comment">
-            <a class="nav-link" href="index.php?page=edit_post&id=<?= $article['postId']?>">Modifier</a>
+            <a class="nav-link" href="index.php?page=edit_post&id=<?= esc_url($article['postId'])?>">Modifier</a>
         </div>
         <div class="nav-comment">
-            <a class="nav-link" href="index.php?page=delete_post&id=<?= $article['postId']?>">Supprimer</a>
+            <a class="nav-link" href="index.php?page=delete_post&id=<?= esc_url($article['postId'])?>">Supprimer</a>
         </div>
     </div> 
     </div>

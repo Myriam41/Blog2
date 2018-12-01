@@ -1,11 +1,11 @@
 <?php
 foreach ($post as $article) {
-    $imgHeader = '';
-    $pageTitle = htmlspecialchars($article['title']);
-    $subTitle = htmlspecialchars($article['introduction']);
+    $imgHeader = esc_html('');
+    $pageTitle = esc_html($article['title']);
+    $subTitle = esc_html($article['introduction']);
 
     // Page header little image
-    $imglittle = '';
+    $imglittle = esc_html('');
 
     ob_start();
     //_____________Display Post______________________

@@ -1,8 +1,8 @@
 <?php
 
-$imgHeader = '';
-$pageTitle = '';
-$subTitle = '';
+$imgHeader = esc_html('');
+$pageTitle = esc_html('');
+$subTitle = esc_html('');
 
 // Page header little image
 $imglittle = '';

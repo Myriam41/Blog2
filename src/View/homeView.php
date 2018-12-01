@@ -1,12 +1,12 @@
 <?php
 use App\Entity\Log;
 
-$imgHeader = '../img/chouette_vol_640x420.jpg';
-$pageTitle = 'Développez votre avenir';
-$subTitle = '';
+$imgHeader = esc_html('../img/chouette_vol_640x420.jpg');
+$pageTitle = esc_html('Développez votre avenir');
+$subTitle = esc-hash('');
 
 // Page header little image
-$imglittle = '';
+$imglittle = esc_html('');
 
 ob_start();?>
 

@@ -10,24 +10,24 @@ use App\Controller\CommentController;
 use App\Controller\AdminController;
 use App\Model\Connect;
 
-if (!isset($_SESSION['status'])) {
+if (!isset($_SESSION['status'] && isEmpty($_SESSION['status']))) {
     $_SESSION['status']=0;
 }
 
-if (!isset($_SESSION['connect'])) {
+if (!isset($_SESSION['connect']) && isEmpty($_SESSION['connect'])) {
     $_SESSION['connect']=0;
 }
 
-if (!isset($_SESSION['pseudo'])) {
+if (!isset($_SESSION['pseudo']) && isEmpty($_SESSION['pseudo'])) {
     $_SESSION['pseudo']=0;
 }
 
-if (!isset($_SESSION['userId'])) {
+if (!isset($_SESSION['userId']) && isEmpty($_SESSION['userId'])) {
     $_SESSION['userId']=0;
 }
 
 // Default opening : homeView.php
-if (isset($_GET['page'])) {
+if (isset($_GET['page']) && !isEmpty($_GET['page'])) {
     $p = $_GET['page'];
 } else {
     $p = 'home';
@@ -59,11 +59,15 @@ if ($p === 'postNew') {
 }
 
 // Add Post
-if ($p === 'postAdd') {
-    $_SESSION['title'] = htmlspecialchars($_POST['title'], ENT_IGNORE);
-    $_SESSION['introduction'] = htmlspecialchars($_POST['introduction'], ENT_IGNORE);
-    $_SESSION['content'] = htmlspecialchars($_POST['content'], ENT_IGNORE);
-    $_SESSION['author'] = htmlspecialchars($_POST['author'], ENT_IGNORE);
+if ($p === 'postAdd' &&
+isset($_POST['title']) && !isEmpty($_POST['title']) &&
+isset($_POST['introduction']) && !isEmpty($_POST['introduction']) &&
+isset($_POST['content']) && !isEmpty($_POST['content']) &&
+isset($_POST['author']) && !isEmpty($_POST['author'])) {
+    $_SESSION['title'] = esc_html($_POST['title'], ENT_IGNORE);
+    $_SESSION['introduction'] = esc_html($_POST['introduction'], ENT_IGNORE);
+    $_SESSION['content'] = esc_html($_POST['content'], ENT_IGNORE);
+    $_SESSION['author'] = esc_html($_POST['author'], ENT_IGNORE);
 
     $newPost = new PostController;
     $newPost->newPost();
@@ -71,25 +75,31 @@ if ($p === 'postAdd') {
 }
 
 // edit post
-if ($p === 'edit_post') {
+if ($p === 'edit_post' &&
+isset($_GET['id']) && !isEmpty($_GET['id'])) {
     $_SESSION['postId']= intval($_GET['id']);
     $postController = new PostController();
     $postController->postEdit();
 }
 
 //update post
-if ($p === 'postEdit') {
-    $_SESSION['title']= ($_POST['title']); //ne fonctionne pas avec htmlspecialchars
-    $_SESSION['introduction']= htmlspecialchars($_POST['introduction'], ENT_IGNORE);
-    $_SESSION['content']= htmlspecialchars($_POST['content'], ENT_IGNORE);
-    $_SESSION['author']= htmlspecialchars($_POST['author'], ENT_IGNORE);
+if ($p === 'postEdit' &&
+isset($_POST['title']) && !isEmpty($_POST['title']) &&
+isset($_POST['introduction']) && !isEmpty($_POST['introduction']) &&
+isset($_POST['content']) && !isEmpty($_POST['content']) &&
+isset($_POST['author']) && !isEmpty($_POST['author'])) {
+    $_SESSION['title']= esc_html($_POST['title']);
+    $_SESSION['introduction']= esc_html($_POST['introduction'], ENT_IGNORE);
+    $_SESSION['content']= esc_html($_POST['content'], ENT_IGNORE);
+    $_SESSION['author']= esc_html($_POST['author'], ENT_IGNORE);
     $postController = new PostController();
     $postController->postUpdate();
     $postController->post();
 }
 
 // delete post and his comments
-if ($p === 'delete_post') {
+if ($p === 'delete_post' &&
+isset($_GET['id']) && !isEmpty($_GET['id'])) {
     $_SESSION['postId']= intval($_GET['id']);
     $postController = new PostController();
     $postController->postDelete();
@@ -105,7 +115,9 @@ if ($p === 'formHome') {
 }
 
 // Identification
-if ($p === 'formLogin') {
+if ($p === 'formLogin' &&
+isset($_POST['pseudo']) && !isEmpty($_POST['pseudo']) &&
+isset($_POST['pass']) && !isEmpty($_POST['passs'])) {
     //Data reception
     $_SESSION['pseudo']= htmlspecialchars($_POST['pseudo']);
     $_SESSION['pass'] = htmlspecialchars($_POST['pass']);
@@ -135,12 +147,16 @@ if ($p === 'formLogin') {
 }
 
 //Registration
-if ($p === 'formAddUser') {
+if ($p === 'formAddUser' &&
+isset($_POST['pseudo']) && !isEmpty($_POST['pseudo']) &&
+isset($_POST['pass']) && !isEmpty($_POST['passs']) &&
+isset($_POST['email']) && !isEmpty($_POST['email']) &&
+isset($_POST['confpass']) && !isEmpty($_POST['confpass'])) {
     //Data reception
-    $_SESSION['pseudo']= htmlspecialchars($_POST['pseudo']);
-    $_SESSION['pass'] = htmlspecialchars($_POST['pass']);
-    $_SESSION['email']= htmlspecialchars($_POST['email']);
-    $_SESSION['confPass'] = htmlspecialchars($_POST['confPass']);
+    $_SESSION['pseudo']= esc_html($_POST['pseudo']);
+    $_SESSION['pass'] = esc_html($_POST['pass']);
+    $_SESSION['email']= esc_html($_POST['email']);
+    $_SESSION['confPass'] = esc_html($_POST['confPass']);
 
     //Vérifier qu'aucun champs est vide
     if (!$_SESSION['pseudo']) {
@@ -204,7 +220,9 @@ if ($p === 'admin') {
 }
 
 // valid article
-if ($p === 'valid_post') {
+if ($p === 'valid_post' &&
+isset($_GET['id']) && !isEmpty($_GET['id']) &&
+isset($_GET['v']) && !isEmpty($_GET['v'])) {
     $_SESSION['postId']= intval($_GET['id']);
     $_SESSION['postValid']= intval($_GET['v']);
     $adminController = new AdminController();
@@ -213,7 +231,9 @@ if ($p === 'valid_post') {
 }
 
 // valid comment
-if ($p === 'valid_comment') {
+if ($p === 'valid_comment' &&
+isset($_GET['id']) && !isEmpty($_GET['id']) &&
+isset($_GET['v']) && !isEmpty($_GET['v'])) {
     $_SESSION['commentId']= intval($_GET['id']);
     $_SESSION['commentValid']= intval($_GET['v']);
     $adminController = new AdminController();
@@ -222,7 +242,9 @@ if ($p === 'valid_comment') {
 }
 
 // valid user
-if ($p === 'valid_user') {
+if ($p === 'valid_user' &&
+isset($_GET['id']) && !isEmpty($_GET['id']) &&
+isset($_GET['v']) && !isEmpty($_GET['v'])) {
     $_SESSION['userId']= intval($_GET['id']);
     $_SESSION['status']= intval($_GET['v']);
     $adminController = new AdminController();
@@ -232,7 +254,8 @@ if ($p === 'valid_user') {
 
 //________________COMMENTS________________
 // Adding a comment
-if ($p === 'commentAdd') {
+if ($p === 'commentAdd' &&
+isset($_GET['contmessage']) && !isEmpty($_GET['contmessage']))
     $_SESSION['contmessage']=$_POST['contmessage'];
     $commentController = new CommentController();
     $commentController->commentAdd(); ?><script>alert('Votre commentaire a été envoyé pour être soumis à validation')</script> <?php
@@ -243,24 +266,26 @@ if ($p === 'commentAdd') {
 }
 
 // reply comment
-if ($p === 'reply_comment') {
+if ($p === 'reply_comment' &&
+isset($_GET['id']) && !isEmpty($_GET['id'])) {
     $_SESSION['parentId']= intval($_GET['id']);
     require '../src/View/replyCommentView.php';
 }
 
 // edit comment
-if ($p === 'edit_comment') {
+if ($p === 'edit_comment' &&
+isset($_GET['id']) && !isEmpty($_GET['id']) &&
+isset($_GET['contmessage']) && !isEmpty($_GET['contmessage'])) {
     $_SESSION['commentId']= intval($_GET['id']);
-    $_SESSION['contmessage']= ($_POST['contmessage']);
+    $_SESSION['contmessage']= esc_html($_POST['contmessage']);
     $commentController = new CommentController();
     $commentController->commentEdit();
-
-    //commment écrire directement sur la page ? AJAX
 }
 
 //update comment
-if ($p === 'commentEdit') {
-    $_SESSION['contmessage']= htmlspecialchars($_POST['contmessage'], ENT_IGNORE);
+if ($p === 'commentEdit'&&
+isset($_GET['contmessage']) && !isEmpty($_GET['contmessage'])) {
+    $_SESSION['contmessage']= esc_html($_POST['contmessage'], ENT_IGNORE);
     $commentController = new CommentController();
     $commentController->commentUpdate();
 
@@ -269,7 +294,8 @@ if ($p === 'commentEdit') {
 }
 
 // delete comment
-if ($p === 'delete_comment') {
+if ($p === 'delete_comment'&&
+isset($_GET['id']) && !isEmpty($_GET['id'])) {
     $_SESSION['commentId']= intval($_GET['id']);
     $commentController = new CommentController();
     $commentController->commentDelete();

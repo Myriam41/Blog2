@@ -1,11 +1,11 @@
 <?php
 
-$imgHeader = '';
-$pageTitle = '';
-$subTitle = 'Coin administration';
+$imgHeader = esc_html('');
+$pageTitle = esc_html('');
+$subTitle = esc_html('Coin administration');
 
 // Page header little image
-$imglittle = '';
+$imglittle = esc_html('');
 
 ob_start();?> 
     <div class='container'>
@@ -29,7 +29,7 @@ ob_start();?>
             //initialisation de la lecture du tableau
             $k = 0;
             //création du tableau?>
-            <table border="1">
+            <table border ="1">
                 <tr>          
                     <th scope="col">Utilisateur</th>
                     <th scope="col">Statut</th>
@@ -42,16 +42,16 @@ ob_start();?>
 <?php 
                         if ($k < $nbData) {
                             ?>
-                            <td> <?php echo $user['pseudo']; ?> </td>
+                            <td> <?php echo esc_attr($user['pseudo']); ?> </td>
                             <td> <?php 
                                 if ($user['status']==1) {
                                     ?>
-                                    <a class="btn btn-success" href="index.php?page=valid_user&id=<?= $user['id'] ?>&v=<?=$user['status']?>"</a>
+                                    <a class="btn btn-success" href="index.php?page=valid_user&id=<?= esc_url($user['id']) ?>&v=<?= esc_url($user)['status']?>"></a>
 <?php
                                 }
                             if ($user['status']==0) {
                                 ?>
-                                    <a class="btn btn-danger" href="index.php?page=valid_user&id=<?= $user['id'] ?>&v=<?=$user['status']?>"></a>
+                                    <a class="btn btn-danger" href="index.php?page=valid_user&id=<?= esc_url($user['id']) ?>&v=<?= esc_url($user['status'])?>"></a>
 <?php
                             } ?>   </td>
 <?php
@@ -97,27 +97,27 @@ ob_start();?>
 
 <?php           foreach ($posts as $post) {
                 for ($i=1; $i<=$nbLigne; $i++) {
-                    $_SESSION['pseudo'] = $post['pseudo'];
-                    $_SESSION['email'] = $post['email']; ?>       
+                    $_SESSION['pseudo'] = esc_attr($post['pseudo']);
+                    $_SESSION['email'] = esc_attr($post['email']); ?>       
                         <tr>
 <?php 
                         if ($k < $nbData2) {
                             ?>
-                            <td> <?php echo $post['title']; ?> </td>
-                            <td> <?php echo $post['introduction']; ?> </td>
-                            <td> <?php echo $post['content']; ?> </td>
-                            <td> <?php echo $post['createdAt']; ?> </td>
-                            <td> <?php echo $post['updateAt']; ?> </td>
-                            <td> <?php echo $post['postValid'];
-                            echo $post['postId'];
+                            <td> <?php echo esc_attr($post['title']); ?> </td>
+                            <td> <?php echo esc_attr($post['introduction']); ?> </td>
+                            <td> <?php echo esc_attr($post['content']); ?> </td>
+                            <td> <?php echo esc_attr($post['createdAt']); ?> </td>
+                            <td> <?php echo esc_attr($post['updateAt']); ?> </td>
+                            <td> <?php echo esc_attr($post['postValid']);
+                            echo esc_attr($post['postId']);
                             if ($post['postValid']==1) {
                                 ?>
-                                    <a class="btn btn-success" href="index.php?page=valid_post&id=<?= $post['postId'] ?>&v=<?=$post['postValid']?>"></a>
+                                    <a class="btn btn-success" href="index.php?page=valid_post&id=<?= esc_url($post['postId']) ?>&v=<?= esc_url($post['postValid'])?>"></a>
 <?php
                             }
                             if ($post['postValid']==0) {
                                 ?>
-                                    <a class="btn btn-danger" href="index.php?page=valid_post&id=<?= $post['postId'] ?>&v=<?=$post['postValid']?>"></a>
+                                    <a class="btn btn-danger" href="index.php?page=valid_post&id=<?= esc_url($post['postId']) ?>&v=<?= esc_url($post['postValid'])?>"></a>
 <?php
                             } ?>                                                          
                             </td>
@@ -168,18 +168,18 @@ ob_start();?>
 <?php 
                         if ($k < $nbData3) {
                             ?>
-                            <td> <?php echo $comment['contmessage']; ?> </td>
-                            <td> <?php echo $comment['createdAt']; ?> </td>
-                            <td> <?php echo $comment['updateAt']; ?> </td>
+                            <td> <?php echo esc_attr($comment['contmessage']); ?> </td>
+                            <td> <?php echo esc_attr($comment['createdAt']); ?> </td>
+                            <td> <?php echo esc_attr($comment['updateAt']); ?> </td>
                             <td> <?php 
                                 if ($comment['commentValid']==1) {
                                     ?>
-                                    <a class="btn btn-success" href="index.php?page=valid_comment&id=<?= $comment['commentId'] ?>&v=<?=$comment['commentValid']?>"></a>
+                                    <a class="btn btn-success" href="index.php?page=valid_comment&id=<?= esc_url($comment['commentId']) ?>&v=<?= esc_url($comment['commentValid'])?>"></a>
 <?php
                                 }
                             if ($comment['commentValid']==0) {
                                 ?>
-                                    <a class="btn btn-danger" href="index.php?page=valid_comment&id=<?= $comment['commentId'] ?>&v=<?=$comment['commentValid']?>"></a>
+                                    <a class="btn btn-danger" href="index.php?page=valid_comment&id=<?= esc_url($comment['commentId']) ?>&v=<?= esc_url($comment['commentValid'])?>"></a>
 <?php
                             } ?>   </td>
 <?php

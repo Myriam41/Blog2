@@ -1,35 +1,35 @@
 <?php
 foreach ($post as $data) {
-    $imgHeader = '';
-    $pageTitle = htmlspecialchars($data['title']);
-    $subTitle = htmlspecialchars($data['introduction']);
+    $imgHeader = esc_html('');
+    $pageTitle = esc_html($data['title']);
+    $subTitle = esc_html($data['introduction']);
 
     // Page header little image
-    $imglittle = '';
+    $imglittle = esc_html('');
 
     ob_start(); ?>
     <div class="bloccomments">  
-    <form action="index.php?page=postEdit&id=<?=$_SESSION['postId']; ?>" method="post" class="col-lg-10">
+    <form action="index.php?page=postEdit&id=<?= esc_url($_SESSION['postId']); ?>" method="post" class="col-lg-10">
         <legend>Modifier mon article</legend>
         <fieldset>
             <div class="form group">  
                 <label>Titre: </label>
-                <textarea id="title" name="title" type="text" class="form-control" rows="1" cols="50"><?= $data['title']; ?></textarea> 
+                <textarea id="title" name="title" type="text" class="form-control" rows="1" cols="50"><?= esc_attr($data['title']); ?></textarea> 
             </div>
 
             <div class="form group">  
                 <label>chapo : </label>
-                <textarea id="introduction" name="introduction" type="text" class="form-control" rows="1" cols="50"><?= $data['introduction']; ?></textarea> 
+                <textarea id="introduction" name="introduction" type="text" class="form-control" rows="1" cols="50"><?= esc_attr($data['introduction']); ?></textarea> 
             </div>
 
             <div class="form group">  
                 <label>Auteur : </label>
-                <textarea id="author" name="author" type="text" class="form-control" rows="1" cols="50"><?= $data['author']; ?></textarea> 
+                <textarea id="author" name="author" type="text" class="form-control" rows="1" cols="50"><?= esc_attr($data['author']); ?></textarea> 
             </div>
 
             <div class="form group">  
                 <label>Article : </label>
-                <textarea id="content" name="content" class="form-control" rows="4" cols="50"><?= $data['content']; ?></textarea> 
+                <textarea id="content" name="content" class="form-control" rows="4" cols="50"><?= esc_attr($data['content']); ?></textarea> 
             </div>
 <?php
 }?>
