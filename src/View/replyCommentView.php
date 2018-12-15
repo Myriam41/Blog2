@@ -1,7 +1,6 @@
 <?php
 
 // Page header little image
-$imglittle = '';
 
 ob_start();?>
     <div class="bloccomments">
