@@ -255,7 +255,7 @@ isset($_GET['v']) && !isEmpty($_GET['v'])) {
 //________________COMMENTS________________
 // Adding a comment
 if ($p === 'commentAdd' &&
-isset($_GET['contmessage']) && !isEmpty($_GET['contmessage']))
+isset($_GET['contmessage']) && !isEmpty($_GET['contmessage'])){
     $_SESSION['contmessage']=$_POST['contmessage'];
     $commentController = new CommentController();
     $commentController->commentAdd(); ?><script>alert('Votre commentaire a été envoyé pour être soumis à validation')</script> <?php
