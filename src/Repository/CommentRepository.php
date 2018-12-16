@@ -54,7 +54,7 @@ class CommentRepository extends Connect
      * function SELECT comments of one post
      * @return $comments array
      */
-    public function getCommentsPost($articleId)
+    public function getCommentsPost()
     {
         $db = $this->getDb();
     
