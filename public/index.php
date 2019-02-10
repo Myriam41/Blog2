@@ -10,25 +10,25 @@ use App\Controller\CommentController;
 use App\Controller\AdminController;
 use App\Model\Connect;
 
-if (!isset($_SESSION['status'] && isEmpty($_SESSION['status']))) {
+if (!isset($_SESSION['status']) && empty($_SESSION['status'])) {
     $_SESSION['status']=0;
 }
 
-if (!isset($_SESSION['connect']) && isEmpty($_SESSION['connect'])) {
+if (!isset($_SESSION['connect']) && empty($_SESSION['connect'])) {
     $_SESSION['connect']=0;
 }
 
-if (!isset($_SESSION['pseudo']) && isEmpty($_SESSION['pseudo'])) {
+if (!isset($_SESSION['pseudo']) && empty($_SESSION['pseudo'])) {
     $_SESSION['pseudo']=0;
 }
 
-if (!isset($_SESSION['userId']) && isEmpty($_SESSION['userId'])) {
+if (!isset($_SESSION['userId']) && empty($_SESSION['userId'])) {
     $_SESSION['userId']=0;
 }
 
 // Default opening : homeView.php
-if (isset($_GET['page']) && !isEmpty($_GET['page'])) {
-    $p = wp_verify_nonce(sanitize_key($_GET['page']));
+if (isset($_GET['page']) && !empty($_GET['page'])) {
+    $p = $_GET['page'] ;
 } else {
     $p = 'home';
 }
@@ -60,10 +60,10 @@ if ($p === 'postNew') {
 
 // Add Post
 if ($p === 'postAdd' &&
-isset($_POST['title']) && !isEmpty($_POST['title']) &&
-isset($_POST['introduction']) && !isEmpty($_POST['introduction']) &&
-isset($_POST['content']) && !isEmpty($_POST['content']) &&
-isset($_POST['author']) && !isEmpty($_POST['author'])) {
+isset($_POST['title']) && empty($_POST['title']) &&
+isset($_POST['introduction']) && empty($_POST['introduction']) &&
+isset($_POST['content']) && empty($_POST['content']) &&
+isset($_POST['author']) && empty($_POST['author'])) {
     $_SESSION['title'] = esc_html($_POST['title'], ENT_IGNORE);
     $_SESSION['introduction'] = esc_html($_POST['introduction'], ENT_IGNORE);
     $_SESSION['content'] = esc_html($_POST['content'], ENT_IGNORE);

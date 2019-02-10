@@ -1,12 +1,12 @@
 <?php
 use App\Entity\Log;
 
-$imgHeader = esc_html('../img/chouette_vol_640x420.png');
-$pageTitle = esc_html('Développez votre avenir');
-$subTitle = esc_html('Myriam Stampers');
+$imgHeader = ('../img/chouette_vol_640x420.png');
+$pageTitle = ('Développez votre avenir');
+$subTitle = ('Myriam Stampers');
 
 // Page header little image
-$imglittle = esc_h('');
+$imglittle = ('');
 
 ob_start();?>
 <div class="container-fluid">
