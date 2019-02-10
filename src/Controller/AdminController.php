@@ -16,10 +16,10 @@ class AdminController
     /**
      * function valid user
      */
-    public function validUser()
+   public function validUser()
     {
-        $userRepo = new userRepository();
-        $valid = $userRepo->updateValidUser();
+      $userRepo = new userRepository();
+      $valid = $userRepo->updateValidUser();
     }
 
     /**

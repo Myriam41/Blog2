@@ -35,8 +35,10 @@ class ConnectController
             $newUser->newUser();
         // faire valider l'email
         } else {
-            ?> <script> alert("Merci de choisir un autre pseudo")</script>
+            ?> 
+                <script> alert("Merci de choisir un autre pseudo")</script>
             <?php
+                require '../src/View/registrationView.php';
         }
     }
 
@@ -53,16 +55,18 @@ class ConnectController
         $isPasswordCorrect = password_verify($_SESSION['pass'], $user['pass']);
 
         if (!$user) {
-            echo 'Mauvais identifiant ou mot de passe !';
+            ?> 
+                <script> alert("Votre Pseudo et Mot de passe sont incorrects")</script>
+            <?php
+                require '../src/View/registrationView.php';
+
         } else {
             if ($isPasswordCorrect) {
                 $_SESSION['userId'] = $user['id'];
                 $_SESSION['pseudo'] = $user['pseudo'];
                 $_SESSION['status'] = $user['status'];
                 $_SESSION['connect'] = 1;
-            } else {
-                echo 'Mauvais identifiant ou mot de passe !';
-            }
+            } 
         }
     }
 
