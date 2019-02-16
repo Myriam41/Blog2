@@ -11,7 +11,8 @@ ob_start();?>
     <div class='container'>
     <!--liste des utilisateurs affichant leur nom, et statut et date enregistrement-->
         liste des utilisateurs pour l'attribution des status<br/>
-    <?php
+    <?php echo  $_SESSION['statusVal'] ;
+    
         //création d'un tableau pour gérer les utilisateurs
         $nbCol = 2;
         $array = array('pseudo', 'status');
@@ -45,7 +46,7 @@ ob_start();?>
                             <td> <?php echo ($user['pseudo']); ?> </td>
                             <td> <?php 
                                 if ($user['status']==1) {
-                                    ?>
+                                ?>
                                     <a class="btn btn-success" href="index.php?page=valid_user&id=<?= $user['id'] ?>&v=<?= $user['status']?>"></a>
 <?php
                                 }
@@ -192,12 +193,6 @@ ob_start();?>
 <?php
         } ?>
     </div><br/>
-
-    <!--Liste des statuts.-->
-        <div class='row'>
-            liste des status pour création éventuellement
-        </div>
-    </div>
 <?php
 $content = ob_get_clean();
 

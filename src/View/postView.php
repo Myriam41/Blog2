@@ -1,8 +1,8 @@
 <?php
 foreach ($post as $article) {
     $imgHeader = '';
-    $pageTitle = ($article['title']);
-    $subTitle = ($article['introduction']);
+    $pageTitle = $article['title'];
+    $subTitle = $article['introduction'];
 
     // Page header little image
     $imglittle = '';

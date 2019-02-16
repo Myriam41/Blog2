@@ -1,11 +1,11 @@
 <?php
 
-$imgHeader = esc_html('../img/chouette_vol_640x420.png');
-$pageTitle = esc_html('Ecrire');
-$subTitle = esc_h('partager ses connaisances');
+$imgHeader = '../img/chouette_vol_640x420.png';
+$pageTitle = 'Ecrire';
+$subTitle = 'partager ses connaisances';
 
 // Page header little image
-$imglittle = esc_html('');
+$imglittle = '';
 
 ob_start();?>
 

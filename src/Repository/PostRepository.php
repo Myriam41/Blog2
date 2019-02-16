@@ -153,7 +153,7 @@ class PostRepository extends Connect
 
         $req->execute();
 
-        $reqUpdate = 'DELETE FROM comment';
+        $reqUpdate = 'DELETE FROM comments';
         $reqWhere = ' WHERE postid=:id';
         $req = $db->prepare($reqUpdate . $reqWhere);
         $req->bindParam(':id', $_SESSION['postId'], \PDO::PARAM_INT);

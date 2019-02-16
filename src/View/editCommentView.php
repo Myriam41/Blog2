@@ -1,8 +1,8 @@
 <?php
 
-$imgHeader = ('');
-$pageTitle = ('');
-$subTitle = ('');
+$imgHeader = '';
+$pageTitle = '';
+$subTitle = '';
 
 // Page header little image
 $imglittle = ('');

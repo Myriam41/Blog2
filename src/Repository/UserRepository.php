@@ -65,22 +65,22 @@ class UserRepository extends Connect
     {
         $db = $this->getDb();
 
-        if ($_SESSION['status']==1) {
+        if ($_SESSION['statusVal']===1) {
             $reqUpdate = 'UPDATE user';
             $reqSet = ' SET status=0';
             $reqWhere = ' WHERE id=:id';
             $req = $db->prepare($reqUpdate . $reqSet . $reqWhere);
-            $req->bindParam(':id', $_SESSION['userId'], \PDO::PARAM_INT);
+            $req->bindParam(':id', $_SESSION['userIdVal'], \PDO::PARAM_INT);
 
             $req->execute();
         }
 
-        if ($_SESSION['status']==0) {
+        if ($_SESSION['statusVal']===0) {
             $reqUpdate = 'UPDATE user';
             $reqSet = ' SET status=1';
             $reqWhere = ' WHERE id=:id';
             $req = $db->prepare($reqUpdate . $reqSet . $reqWhere);
-            $req->bindParam(':id', $_SESSION['userId'], \PDO::PARAM_INT);
+            $req->bindParam(':id', $_SESSION['userIdVal'], \PDO::PARAM_INT);
 
             $req->execute();
         }
