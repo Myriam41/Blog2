@@ -29,7 +29,7 @@ abstract class Connect
                 $this->db = $db;
                 return $this->db;
             } catch (PDOException $e) {
-                esc_html(die('Echec lors de la connexion : '.$e->getMessage()));
+                die('Echec lors de la connexion : '.$e->getMessage());
             }
         }
         return $this->db;

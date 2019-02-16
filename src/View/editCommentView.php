@@ -1,22 +1,22 @@
 <?php
 
-$imgHeader = esc_html('');
-$pageTitle = esc_html('');
-$subTitle = esc_html('');
+$imgHeader = ('');
+$pageTitle = ('');
+$subTitle = ('');
 
 // Page header little image
-$imglittle = esc_html('');
+$imglittle = ('');
 
 ob_start();
 foreach ($comment as $data) {
     ?>
     <div class="bloccomments">  
-    <form action="index.php?page=commentEdit&id=<?= esc_attr($_SESSION['commentId']); ?>" method="post" class="col-lg-10">
+    <form action="index.php?page=commentEdit&id=<?= ($_SESSION['commentId']); ?>" method="post" class="col-lg-10">
         <legend>Modifier mon commentaire</legend>
             <fieldset>
                 <div class="form group">  
                     <label>Message : </label>
-                    <textarea id="contmessage" name="contmessage" class="form-control" rows="4" cols="50"><?= esc_attr($data['contmessage']);?></textarea>
+                    <textarea id="contmessage" name="contmessage" class="form-control" rows="4" cols="50"><?= ($data['contmessage']);?></textarea>
                 </div>
     <?php
     }?>

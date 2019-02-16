@@ -10,25 +10,25 @@ use App\Controller\CommentController;
 use App\Controller\AdminController;
 use App\Model\Connect;
 
-if (!isset($_SESSION['status'] && isEmpty($_SESSION['status']))) {
+if (!isset($_SESSION['status']) && empty($_SESSION['status'])) {
     $_SESSION['status']=0;
 }
 
-if (!isset($_SESSION['connect']) && isEmpty($_SESSION['connect'])) {
+if (!isset($_SESSION['connect']) && empty($_SESSION['connect'])) {
     $_SESSION['connect']=0;
 }
 
-if (!isset($_SESSION['pseudo']) && isEmpty($_SESSION['pseudo'])) {
+if (!isset($_SESSION['pseudo']) && empty($_SESSION['pseudo'])) {
     $_SESSION['pseudo']=0;
 }
 
-if (!isset($_SESSION['userId']) && isEmpty($_SESSION['userId'])) {
+if (!isset($_SESSION['userId']) && empty($_SESSION['userId'])) {
     $_SESSION['userId']=0;
 }
 
 // Default opening : homeView.php
-if (isset($_GET['page']) && !isEmpty($_GET['page'])) {
-    $p = wp_verify_nonce(sanitize_key($_GET['page']));
+if (isset($_GET['page']) && !empty($_GET['page'])) {
+    $p = $_GET['page'] ;
 } else {
     $p = 'home';
 }
@@ -60,10 +60,10 @@ if ($p === 'postNew') {
 
 // Add Post
 if ($p === 'postAdd' &&
-isset($_POST['title']) && !isEmpty($_POST['title']) &&
-isset($_POST['introduction']) && !isEmpty($_POST['introduction']) &&
-isset($_POST['content']) && !isEmpty($_POST['content']) &&
-isset($_POST['author']) && !isEmpty($_POST['author'])) {
+isset($_POST['title']) && empty($_POST['title']) &&
+isset($_POST['introduction']) && empty($_POST['introduction']) &&
+isset($_POST['content']) && empty($_POST['content']) &&
+isset($_POST['author']) && empty($_POST['author'])) {
     $_SESSION['title'] = esc_html($_POST['title'], ENT_IGNORE);
     $_SESSION['introduction'] = esc_html($_POST['introduction'], ENT_IGNORE);
     $_SESSION['content'] = esc_html($_POST['content'], ENT_IGNORE);
@@ -115,90 +115,98 @@ if ($p === 'formHome') {
 }
 
 // Identification
-if ($p === 'formLogin' &&
-isset($_POST['pseudo']) && !isEmpty($_POST['pseudo']) &&
-isset($_POST['pass']) && !isEmpty($_POST['passs'])) {
+if ($p === 'formLogin' ) {
+    if (empty($_POST['pseudo'])) {
+    ?> 
+        <script> alert("Merci de renseigner votre pseudonime")</script>
+    <?php
+        require '../src/View/registrationView.php';
+    }
+
+    if (empty($_POST['pass'])) {
+        ?> 
+            <script> alert("Merci de renseigner votre mot de passe")</script>
+        <?php
+            require '../src/View/registrationView.php';
+    }
+
     //Data reception
     $_SESSION['pseudo']= htmlspecialchars($_POST['pseudo']);
     $_SESSION['pass'] = htmlspecialchars($_POST['pass']);
   
-    //Vérifier qu'aucun champs est vide
-    if (!$_SESSION['pseudo']) {
-        ?>
-        <script> alert("Merci de renseigner votre pseudonime")</script>
-    <?php
-        require '../src/View/registrationView.php';
-    }
-  
-    if (!empty($_SESSION['pseudo']) and !$_SESSION['pass']) {
-        ?> 
-        <script> alert("Merci de renseigner votre mot de passe")</script>
-    <?php
-        require '../src/View/registrationView.php';
-    }
-    if (!empty($_SESSION['pseudo']) and !empty($_SESSION['pass'])) {
-        //vérification du pseudo et du mot de passe et passage en mode connecté
-        $verifPseudo= new ConnectController();
-        $verifPseudo->Login();
-        require '../src/View/homeView.php'; ?> 
+    //vérification du pseudo et du mot de passe et passage en mode connecté
+    $verifPseudo= new ConnectController();
+    $verifPseudo->Login();
+
+    require '../src/View/homeView.php'; 
+
+    ?> 
         <script> alert("Bienvenue")</script>
     <?php
-    }
+  
+}
+else {
+    echo 'Votre Pseudo ou mot de passe est incorrect';
 }
 
 //Registration
-if ($p === 'formAddUser' &&
-isset($_POST['pseudo']) && !isEmpty($_POST['pseudo']) &&
-isset($_POST['pass']) && !isEmpty($_POST['passs']) &&
-isset($_POST['email']) && !isEmpty($_POST['email']) &&
-isset($_POST['confpass']) && !isEmpty($_POST['confpass'])) {
-    //Data reception
-    $_SESSION['pseudo']= esc_html($_POST['pseudo']);
-    $_SESSION['pass'] = esc_html($_POST['pass']);
-    $_SESSION['email']= esc_html($_POST['email']);
-    $_SESSION['confPass'] = esc_html($_POST['confPass']);
-
-    //Vérifier qu'aucun champs est vide
-    if (!$_SESSION['pseudo']) {
+if ($p === 'formAddUser' ){
+    //messages according to the empty field
+    if (empty($_POST['pseudo'])) {
         ?> 
-        <script> alert("Merci de renseigner votre pseudonime")</script>
-    <?php
-        require '../src/View/registrationView.php';
+            <script> alert("Merci de renseigner votre pseudonime")</script>
+        <?php
+            require '../src/View/registrationView.php';
     }
 
-    if (!$_SESSION['pass']) {
-        ?> <script> alert("Merci de renseigner votre mot de passe")</script>
-    <?php
-        require '../src/View/registrationView.php';
+    if (empty($_POST['pass'])) {
+        ?> 
+            <script> alert("Merci de renseigner votre mot de passe")</script>
+        <?php
+            require '../src/View/registrationView.php';
     }
 
-    if (!$_SESSION['email']) {
-        ?> <script> alert("Merci de renseigner votre e-mail")</script>
-    <?php
-        require '../src/View/registrationView.php';
+    if (empty($_POST['email'])) {
+        ?> 
+            <script> alert("Merci de renseigner votre e-mail")</script>
+        <?php
+            require '../src/View/registrationView.php';
     }
 
-    if (!$_SESSION['confPass']) {
-        ?> <script> alert("Merci de confirmer votre mot de passe")</script>
-    <?php
-        require '../src/View/registrationView.php';
+    if (empty($_POST['confPass'])) {
+        ?> 
+            <script> alert("Merci de confirmer votre email")</script>
+        <?php
+            require '../src/View/registrationView.php';
     }
 
-    //si les mots de passes sont identiques
+    //Data reception
+    $_SESSION['pseudo']= htmlspecialchars($_POST['pseudo']);
+    $_SESSION['pass'] = htmlspecialchars($_POST['pass']);
+    $_SESSION['email']= htmlspecialchars($_POST['email']);
+    $_SESSION['confPass'] = htmlspecialchars($_POST['confPass']);
+
+    //if both passwords are identical
     if ($_SESSION['pass'] === $_SESSION['confPass']) {
+
         //data processing
         $pass_hache= new ConnectController();
         $_SESSION['pass']=$pass_hache->hach();
+        
+    } else {
+        ?> 
+            <script> alert("Les mots de passe ne sont pas identiques")</script>
+        <?php
+            require '../src/View/registrationView.php';
+    }
 
-        // Verification of the free pseudo. If ok add new user
+    // Verification of the free pseudo. If ok add new user
         $existPseudo= new ConnectController();
         $existPseudo->existPseudo();
-
+       
         require '../src/View/homeView.php';
-    } else {
-        echo 'Les deux mots de passes sont différents';
-    }
 }
+
 
 //________________LOG AND STATUS___________________
 // Identification
