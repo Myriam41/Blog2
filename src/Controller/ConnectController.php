@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Repository\ConnectRepository;
-use App\Entity\Log;
 
 /**
  * Class ConnectController

@@ -283,8 +283,7 @@ if ($p === 'valid_user'){
         $_SESSION['statusVal']= intval($_GET['v']);
         $adminController = new AdminController();
         $adminController->validUser();
-        //$adminController->displayUsers();
-        echo 'vide !';
+        $adminController->displayUsers();
     }
 
     else {

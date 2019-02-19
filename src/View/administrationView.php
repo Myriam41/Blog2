@@ -9,7 +9,7 @@ $imglittle = '';
 
 ob_start();?> 
     <div class='container'>
-    <!--liste des utilisateurs affichant leur nom, et statut et date enregistrement-->
+    <!--list of users displaying their name, and status and date registration-->
         liste des utilisateurs pour l'attribution des status<br/>
     <?php echo  $_SESSION['statusVal'] ;
     
@@ -47,12 +47,12 @@ ob_start();?>
                             <td> <?php 
                                 if ($user['status']==1) {
                                 ?>
-                                    <a class="btn btn-success" href="index.php?page=valid_user&id=<?= $user['id'] ?>&v=<?= $user['status']?>"></a>
+                                    <a class="btn btn-success" href="index.php?page=valid_user&id=<?=$user['id']?>&v=<?=$user['status']?>"></a>
 <?php
                                 }
                             if ($user['status']==0) {
                                 ?>
-                                    <a class="btn btn-danger" href="index.php?page=valid_user&id=<?= $user['id'] ?>&v=<?= $user['status']?>"></a>
+                                    <a class="btn btn-danger" href="index.php?page=valid_user&id=<?=$user['id']?>&v=<?=$user['status']?>"></a>
 <?php
                             } ?>   </td>
 <?php
@@ -65,16 +65,16 @@ ob_start();?>
 <?php
         } ?>
 
-    <!--liste des articles affichant leur contenu, date, status validation-->
+    <!--list of articles displaying their content, date, status validation-->
     <div class='container'>
             liste des articles pour validation<br/>
     <?php
-        //création d'un tableau pour gérer les utilisateurs
+        //table to manage users
         $nbCol2 = 6;
         $array2 = array('title', 'introduction', 'content', 'createdAt', 'updateAt', 'validation');
         $nbData2 = sizeof($array2);
 
-        //calcul du nombre de ligne
+        //calculating the number of lines
         if (round($nbData2/$nbCol2) != ($nbData2/$nbCol2)) {
             $nbLigne = round(($nbreData2/$nbCol2)+0.5);
         } else {
@@ -98,8 +98,8 @@ ob_start();?>
 
 <?php           foreach ($posts as $post) {
                 for ($i=1; $i<=$nbLigne; $i++) {
-                    $_SESSION['pseudo'] = ($post['pseudo']);
-                    $_SESSION['email'] = ($post['email']); ?>       
+                    $_SESSION['pseudo'] = $post['pseudo'];
+                    $_SESSION['email'] = $post['email']; ?>       
                         <tr>
 <?php 
                         if ($k < $nbData2) {
@@ -113,12 +113,12 @@ ob_start();?>
                             echo ($post['postId']);
                             if ($post['postValid']==1) {
                                 ?>
-                                    <a class="btn btn-success" href="index.php?page=valid_post&id=<?= ($post['postId']) ?>&v=<?= $post['postValid']?>"></a>
+                                    <a class="btn btn-success" href="index.php?page=valid_post&id=<?=$post['postId']?>&v=<?=$post['status']?>"></a>
 <?php
                             }
                             if ($post['postValid']==0) {
                                 ?>
-                                    <a class="btn btn-danger" href="index.php?page=valid_post&id=<?= ($post['postId']) ?>&v=<?= $post['postValid']?>"></a>
+                                    <a class="btn btn-danger" href="index.php?page=valid_post&id=<?=($post['postId'])?>&v=<?=$post['status']?>"></a>
 <?php
                             } ?>                                                          
                             </td>
@@ -175,12 +175,12 @@ ob_start();?>
                             <td> <?php 
                                 if ($comment['commentValid']==1) {
                                     ?>
-                                    <a class="btn btn-success" href="index.php?page=valid_comment&id=<?= $comment['commentId'] ?>&v=<?= ($comment['commentValid'])?>"></a>
+                                    <a class="btn btn-success" href="index.php?page=valid_comment&id=<?=$comment['commentId'] ?>&v=<?=$comment['commentValid']?>"></a>
 <?php
                                 }
                             if ($comment['commentValid']==0) {
                                 ?>
-                                    <a class="btn btn-danger" href="index.php?page=valid_comment&id=<?= ($comment['commentId']) ?>&v=<?= ($comment['commentValid'])?>"></a>
+                                    <a class="btn btn-danger" href="index.php?page=valid_comment&id=<?=$comment['commentId']?>&v=<?=$comment['commentValid']?>"></a>
 <?php
                             } ?>   </td>
 <?php

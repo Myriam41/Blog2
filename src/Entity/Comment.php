@@ -171,7 +171,7 @@ class Comment
     }
 
     /**
-    * @return string updateAt
+    * @return int updateAt
     */
     public function getUpdateAt()
     {
