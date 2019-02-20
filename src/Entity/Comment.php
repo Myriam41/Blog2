@@ -163,7 +163,7 @@ class Comment
     }
 
     /**
-     * @param int $updateAt
+     * @param string $updateAt
      */
     public function setUpdateAt($updateAt)
     {
@@ -171,7 +171,7 @@ class Comment
     }
 
     /**
-    * @return int updateAt
+    * @return string updateAt
     */
     public function getUpdateAt()
     {

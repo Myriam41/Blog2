@@ -141,7 +141,7 @@ if ($p === 'formHome') {
 if ($p === 'formLogin' ) {
     if (empty($_POST['pseudo'])) {
         ?> 
-            <script> alert("Merci de renseigner votre pseudonime")</script>
+            <script> alert("Merci de renseigner votre pseudonyme")</script>
         <?php
         require '../src/View/registrationView.php';
     }
@@ -162,15 +162,21 @@ if ($p === 'formLogin' ) {
         $verifPseudo= new ConnectController();
         $verifPseudo->Login();
 
-        require '../src/View/homeView.php'; 
+        if($_SESSION['connect'] === 1 ){
+            require '../src/View/homeView.php'; 
 
         ?> 
             <script> alert("Bienvenue")</script>
         <?php
-    }
+        }
 
-    else {
-        echo 'Votre Pseudo ou mot de passe est incorrect';
+        if($_SESSION['connect'] === 0){
+            ?> 
+                <script> alert("Votre Pseudo et Mot de passe sont incorrects")</script>
+            <?php
+                require '../src/View/registrationView.php';
+
+        }
     }
 }
 
@@ -217,7 +223,12 @@ if ($p === 'formAddUser' ){
         //data processing
         $pass_hache= new ConnectController();
         $_SESSION['pass']=$pass_hache->hach();
-        
+
+        // Verification of the free pseudo. If ok add new user
+        $existPseudo= new ConnectController();
+        $existPseudo->existPseudo();
+       
+        require '../src/View/homeView.php';   
     } else {
         ?> 
             <script> alert("Les mots de passe ne sont pas identiques")</script>
@@ -225,11 +236,7 @@ if ($p === 'formAddUser' ){
             require '../src/View/registrationView.php';
     }
 
-    // Verification of the free pseudo. If ok add new user
-        $existPseudo= new ConnectController();
-        $existPseudo->existPseudo();
-       
-        require '../src/View/homeView.php';
+
 }
 
 
@@ -248,8 +255,13 @@ if ($p === 'login') {
 //_______________ADMIN__________________
 // display admin gestion
 if ($p === 'admin') {
-    $adminController = new AdminController();
-    $adminController->displayUsers();
+    if($_SESSION['connect']!==1){
+        require '../src/View/registrationView.php';
+    }
+    else{
+        $adminController = new AdminController();
+        $adminController->displayUsers();
+    }  
 }
 
 // valid article
@@ -277,10 +289,11 @@ if ($p === 'valid_comment' &&
 
 // valid user
 if ($p === 'valid_user'){
-    if (!empty($_GET['id']) && !empty($_GET['v'])){
+    if (!empty($_GET['id']) && isset($_GET['v'])){
 
         $_SESSION['userIdVal']= intval($_GET['id']);
         $_SESSION['statusVal']= intval($_GET['v']);
+
         $adminController = new AdminController();
         $adminController->validUser();
         $adminController->displayUsers();

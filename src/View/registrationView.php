@@ -5,9 +5,6 @@ $imgHeader = ('../img/chouette_vol_640x420.png');
 $pageTitle = ('Développez votre avenir');
 $subTitle = ('Myriam Stampers');
 
-// Page header little image
-$imglittle = ('');
-
 ob_start();?>
 <div class="container-fluid">
     <div class = "row">

@@ -51,22 +51,20 @@ class ConnectController
         $user = $connectRepository->getUser();
 
         //check password
-        $isPasswordCorrect = password_verify($_SESSION['pass'], $user['pass']);
-
-        if (!$user) {
-            ?> 
-                <script> alert("Votre Pseudo et Mot de passe sont incorrects")</script>
-            <?php
-                require '../src/View/registrationView.php';
-
-        } else {
+        if (!empty($user)) {
+            $isPasswordCorrect = password_verify($_SESSION['pass'], $user['pass']);
             if ($isPasswordCorrect) {
-                $_SESSION['userId'] = $user['id'];
-                $_SESSION['pseudo'] = $user['pseudo'];
-                $_SESSION['status'] = $user['status'];
-                $_SESSION['connect'] = 1;
-            } 
-        }
+                    $_SESSION['userId'] = $user['id'];
+                    $_SESSION['pseudo'] = $user['pseudo'];
+                    $_SESSION['status'] = $user['status'];
+                    $_SESSION['connect'] = 1;
+
+            }
+
+            else{
+               $_SESSION['connect'] = 0; 
+            }
+        } 
     }
 
     /**

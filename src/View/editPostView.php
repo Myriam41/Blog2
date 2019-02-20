@@ -1,15 +1,15 @@
 <?php
 foreach ($post as $data) {
-    $imgHeader = ('');
+    $imgHeader = '';
     $pageTitle = $data['title'];
     $subTitle = $data['introduction'];
 
-    // Page header little image
-    $imglittle = ('');
+// Page header little image
+    $imglittle = '';
 
     ob_start(); ?>
     <div class="bloccomments">  
-    <form action="index.php?page=postEdit&id=<?= esc_url($_SESSION['postId']); ?>" method="post" class="col-lg-10">
+    <form action="index.php?page=postEdit&id=<?= $_SESSION['postId']; ?>" method="post" class="col-lg-10">
         <legend>Modifier mon article</legend>
         <fieldset>
             <div class="form group">  

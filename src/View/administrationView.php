@@ -13,22 +13,6 @@ ob_start();?>
         liste des utilisateurs pour l'attribution des status<br/>
     <?php echo  $_SESSION['statusVal'] ;
     
-        //création d'un tableau pour gérer les utilisateurs
-        $nbCol = 2;
-        $array = array('pseudo', 'status');
-        $nbData = sizeof($array);
-
-        //calcul du nombre de ligne
-        if (round($nbData/$nbCol) != ($nbData/$nbCol)) {
-            $nbLigne = round(($nbreData/$nbCol)+0.5);
-        } else {
-            $nbLigne = $nbData/$nbCol;
-        }
-
-        //Affichage
-        if ($nbLigne != 0) {
-            //initialisation de la lecture du tableau
-            $k = 0;
             //création du tableau?>
             <table border ="1">
                 <tr>          
@@ -37,11 +21,10 @@ ob_start();?>
                 </tr>
 
 <?php   foreach ($users as $user) {
-                for ($i=1; $i<=$nbLigne; $i++) {
-                    ?>       
+        ?>       
                         <tr>
 <?php 
-                        if ($k < $nbData) {
+        
                             ?>
                             <td> <?php echo ($user['pseudo']); ?> </td>
                             <td> <?php 
@@ -55,36 +38,20 @@ ob_start();?>
                                     <a class="btn btn-danger" href="index.php?page=valid_user&id=<?=$user['id']?>&v=<?=$user['status']?>"></a>
 <?php
                             } ?>   </td>
-<?php
-                        } ?>
                         </tr>
 <?php
-                }
+
             } ?>
             </table><br/>
-<?php
-        } ?>
+
+ 
 
     <!--list of articles displaying their content, date, status validation-->
     <div class='container'>
             liste des articles pour validation<br/>
     <?php
-        //table to manage users
-        $nbCol2 = 6;
-        $array2 = array('title', 'introduction', 'content', 'createdAt', 'updateAt', 'validation');
-        $nbData2 = sizeof($array2);
 
-        //calculating the number of lines
-        if (round($nbData2/$nbCol2) != ($nbData2/$nbCol2)) {
-            $nbLigne = round(($nbreData2/$nbCol2)+0.5);
-        } else {
-            $nbLigne = $nbData2/$nbCol2;
-        }
 
-        //Affichage
-        if ($nbLigne != 0) {
-            //initialisation de la lecture du tableau
-            $k = 0;
             //création du tableau?>
             <table border=1>
                 <tr>          
@@ -97,13 +64,11 @@ ob_start();?>
                 </tr>
 
 <?php           foreach ($posts as $post) {
-                for ($i=1; $i<=$nbLigne; $i++) {
-                    $_SESSION['pseudo'] = $post['pseudo'];
-                    $_SESSION['email'] = $post['email']; ?>       
+ 
+      //              $_SESSION['pseudo'] = $post['pseudo'];
+       //             $_SESSION['email'] = $post['email']; ?>       
                         <tr>
-<?php 
-                        if ($k < $nbData2) {
-                            ?>
+
                             <td> <?php echo ($post['title']); ?> </td>
                             <td> <?php echo ($post['introduction']); ?> </td>
                             <td> <?php echo ($post['content']); ?> </td>
@@ -125,35 +90,15 @@ ob_start();?>
 <?php
                         } ?>
                         </tr>
-<?php
-                }
-            } ?>
+
             </table><br/>
-<?php
-        } ?>
+
     </div><br/>
 
 <!--liste des commentaires affichant leur contenu, date, status validation-->
 <div class='container'>
             liste des commentaires pour validation<br/>
-    <?php
-        //création d'un tableau pour gérer les utilisateurs
-        $nbCol3 = 4;
-        $array3 = array('contmessage', 'createdAt', 'updateAt', 'valid');
-        $nbData3 = sizeof($array3);
 
-        //calcul du nombre de ligne
-        if (round($nbData3/$nbCol3) != ($nbData3/$nbCol3)) {
-            $nbLigne = round(($nbreData2/$nbCol3)+0.5);
-        } else {
-            $nbLigne = $nbData3/$nbCol3;
-        }
-
-        //Affichage
-        if ($nbLigne != 0) {
-            //initialisation de la lecture du tableau
-            $k = 0;
-            //création du tableau?>
             <table border=1>
                 <tr>          
                     <th scope="col">Message</th>
@@ -163,12 +108,10 @@ ob_start();?>
                 </tr>
 
 <?php           foreach ($comments as $comment) {
-                for ($i=1; $i<=$nbLigne; $i++) {
+
                     ?>       
                         <tr>
-<?php 
-                        if ($k < $nbData3) {
-                            ?>
+
                             <td> <?php echo ($comment['contmessage']); ?> </td>
                             <td> <?php echo ($comment['createdAt']); ?> </td>
                             <td> <?php echo ($comment['updateAt']); ?> </td>
@@ -186,12 +129,9 @@ ob_start();?>
 <?php
                         } ?>
                         </tr>
-<?php
-                }
-            } ?>
+
             </table><br/>
-<?php
-        } ?>
+
     </div><br/>
 <?php
 $content = ob_get_clean();
